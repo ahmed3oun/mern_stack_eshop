@@ -3,6 +3,7 @@ const Category = require('../Models/category')
 const mongoose = require('mongoose')
 const ErrorHandler = require('../utils/ErrorHandler')
 const catchAsyncErrors = require('../middlewares/catchAsyncError')
+const APIFeatures = require('../utils/apiFeatures')
 
 // create new product => /products/new 
 exports.newProduct = catchAsyncErrors(async (req,res,next)=>{
@@ -38,10 +39,12 @@ exports.getProductById = catchAsyncErrors (async function (req,res,next) {
     })
 })
 
-// Get all products => /products
+// Get all products => /products?keyword=example
 exports.getAllProducts = catchAsyncErrors( async (req,res,next)=>{
-    console.log("get all products api ...rs");
-    const products = await Product.find()
+
+    const apiFeatures = new APIFeatures(Product.find() , req.query).search().filter()
+
+    const products = await apiFeatures.query 
     res.status(201).json({
         success : true,
         count : products.length ,
