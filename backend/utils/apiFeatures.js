@@ -22,12 +22,15 @@ class APIFeatures {
         //Removing fields from the query
         const removeFields = ['keyword' , 'limit' , 'page'];
         removeFields.forEach(el => delete queryCopy[el])
-
+        
+        //http://localhost:3000/products?category=6059165279ccc91f74c05c91&price[gte]=1&price[lte]=40
         // Advance filter for price , rating ect
         let queryStr = JSON.stringify(queryCopy)
-        
-        
-        this.query=this.query.find(queryCopy)
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g , match => `$${match}`)
+
+        console.log(queryStr);//{"category":"6059165279ccc91f74c05c91","price":{"$gte":"1","$lte":"40"}}
+
+        this.query=this.query.find(JSON.parse(queryStr))
         return this;
     }
 }
