@@ -13,9 +13,11 @@ app.use(errorMiddleware);
 //Routes
 const productRouter = require('./Routes/productRouter');
 const categoryRouter = require('./Routes/categoryRouter');
+const authRouter = require('./Routes/authRouter');
 //Routers
 app.use('/products',productRouter);
 app.use('/categories', categoryRouter);
+app.use('/auth',authRouter);
 
 
 
