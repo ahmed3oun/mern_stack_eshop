@@ -69,6 +69,11 @@ const productSchema = new mongoose.Schema({
             }
         }
     ],
+    user : {
+        type : mongoose.Schema.ObjectId,
+        ref : 'User',
+        required : [false,'Please must be authentifed']
+    },
     createdAt : {
         type : Date ,
         default : Date.now()

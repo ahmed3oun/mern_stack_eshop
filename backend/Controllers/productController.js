@@ -8,9 +8,10 @@ const APIFeatures = require('../utils/apiFeatures')
 // create new product => /products/new 
 exports.newProduct = catchAsyncErrors(async (req,res,next)=>{
 
+    req.body.user = req.user.id
+
     const category = await Category.findById(req.body.category);
     if(!category) return res.status(400).send('Invalid Category')
-
 
     const product = await Product.create({
         name: req.body.name,
@@ -19,6 +20,7 @@ exports.newProduct = catchAsyncErrors(async (req,res,next)=>{
         stock: req.body.stock,
         numOfReviews : req.body.numOfReviews,
         description: req.body.description,
+        user : req.body.user,
         category : category
     }) 
     res.status(201).json({

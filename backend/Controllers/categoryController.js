@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 // Post new category => /categories/admin/new
 exports.newCategory = catchAsyncErrors(async function (req,res,next) {
 
+    
     let category = new Category({
         name: req.body.name,
         icon: req.body.icon,

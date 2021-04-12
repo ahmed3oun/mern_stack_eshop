@@ -3,9 +3,11 @@ const express = require('express');
 const app = express();
 const bodyparser = require('body-parser');
 const errorMiddleware = require('./middlewares/errors');
+const cookieParser = require('cookie-parser')
 
 //middleware
 app.use(express.json());
+app.use(cookieParser())
 app.use(bodyparser.json());
 app.use(errorMiddleware);
 
