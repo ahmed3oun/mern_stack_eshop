@@ -96,6 +96,22 @@ exports.updateOrder = catchAsyncErrors(async function (req,res,next) {
     })
 })
 
+exports.deleteOrder = catchAsyncErrors(async function (req,res,next) {
+    const order = await Order.findById(req.params.id).populate('user','name email')
+
+    if(! order){
+        return next(catchAsyncErrors('No order found with this ID'))
+    }
+    order.remove()
+
+    res.status(200).json({
+        success : true ,
+        message : 'order is removed',
+        order
+    })
+})
+
+
 async function updateStock(productId , quantity) {
     const product = await Product.findById(productId)
     product.stock -= quantity 

@@ -55,6 +55,11 @@ const productSchema = new mongoose.Schema({
     },
     reviews : [
         {
+            user : {
+                type : mongoose.Schema.ObjectId,
+                ref : 'User',
+                required : [false,'Please must be authentifed']
+            },
             name : {
                 type : String ,
                 required : false 
