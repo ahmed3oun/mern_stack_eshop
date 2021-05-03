@@ -1,13 +1,12 @@
-import React from 'react'
-
+import React, { Fragment } from 'react'
+import MetaData from './layout/MetaData'
 const Home = () => {
     return (
-        <div className="container container-fluid">
+        <Fragment>
+            <MetaData title={'Buy Best Products Online'}/>
             <h1 id="products_heading">Latest products </h1>
             <section id="products" className="container mt-5">
             <div className="row">
-             
-
                 <div className="col-sm-12 col-md-6 col-lg-3 my-3">
                 <div className="card p-3 rounded">
                     <img
@@ -19,7 +18,7 @@ const Home = () => {
                         <a href="">AmazonBasics High-Speed HDMI Cable</a>
                     </h5>
                     <div className="ratings mt-auto">
-                    <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star-half-o"></i>
@@ -36,7 +35,7 @@ const Home = () => {
                 
             </div>
     </section>
-        </div>
+        </Fragment>
     )
 }
 
