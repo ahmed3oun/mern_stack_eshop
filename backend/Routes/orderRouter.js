@@ -15,3 +15,6 @@ router.route('all/admin').get( isAuthenticatedUser,authorizeRoles('admin'),allOr
 router.route('/admin/:id')
                     .put( isAuthenticatedUser,authorizeRoles('admin'),updateOrder)
                     .delete(isAuthenticatedUser,authorizeRoles('admin'),deleteOrder)
+
+                
+module.exports = router ;

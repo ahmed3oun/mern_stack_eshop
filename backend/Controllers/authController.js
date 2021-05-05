@@ -197,7 +197,7 @@ exports.updateUser = catchAsyncError( async (req,res,next)=>{
 })
 
 // Delete user   => auth/admin/user/:id
-exports.getUserDetail = catchAsyncError(async (req,res,next)=> {
+exports.deleteUser = catchAsyncError(async (req,res,next)=> {
     
     const user = User.findById(req.params.id)
 
