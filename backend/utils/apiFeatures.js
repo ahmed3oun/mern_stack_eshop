@@ -29,7 +29,7 @@ class APIFeatures {
 
         console.log(queryStr);//{"category":"6059165279ccc91f74c05c91","price":{"$gte":"1","$lte":"40"}}
 
-        this.query=this.query.find(JSON.parse(queryStr))
+        this.query=this.query.find(JSON.parse(queryStr) )
         return this;
     }
 

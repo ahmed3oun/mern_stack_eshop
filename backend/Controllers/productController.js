@@ -7,8 +7,7 @@ const APIFeatures = require('../utils/apiFeatures')
 
 // create new product => /products/new 
 exports.newProduct = catchAsyncErrors(async (req,res,next)=>{
-
-    req.body.user = req.user.id
+     req.body.user = req.user.id
 
     const category = await Category.findById(req.body.category);
     if(!category) return res.status(400).send('Invalid Category')
@@ -26,7 +25,7 @@ exports.newProduct = catchAsyncErrors(async (req,res,next)=>{
     res.status(201).json({
         success : true ,
         product
-    }) 
+    })  
 })
 
 // Get single product => products/:id
@@ -44,6 +43,7 @@ exports.getProductById = catchAsyncErrors (async function (req,res,next) {
 // Get all products => /products?keyword=example&... || /products
 exports.getAllProducts = catchAsyncErrors( async (req,res,next)=>{
 
+    //return next( new ErrorHandler('Error handled' , 400) )
     const resPerPage = 4 ;
     const productsCount = await Product.countDocuments()
 
@@ -53,6 +53,7 @@ exports.getAllProducts = catchAsyncErrors( async (req,res,next)=>{
     res.status(201).json({
         success : true,
         productsCount,
+        resPerPage,
         products
     })
 })
