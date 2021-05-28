@@ -8,9 +8,10 @@ const Header = () => {
         <Fragment>
             <nav className="navbar row">
               <div className="col-12 col-md-3">
-                    <div className="navbar-brand">
+                    <div className="navbar-brand" style={{display : "inline-block"}}>
                         <Link to="/">
-                        <img src="/images/eshop_logo2.png" style={{width:90 , height:50 }} />
+                        <img src="/images/logo.png" style={{width:160 , height:50 }} />
+                        <h4><i style={{ color : '#febd69', paddingLeft:'32px'}}>E-Shop</i></h4>
                         </Link>
                     </div>
               </div>

@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 app.use(express.json());
 app.use(cookieParser())
 app.use(bodyparser.json());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(errorMiddleware);
 
 

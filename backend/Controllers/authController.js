@@ -4,8 +4,21 @@ const ErrorHandler = require('../utils/ErrorHandler')
 const sendToken = require('../utils/jwtToken')
 const sendEmail = require('../utils/sendEmail')
 
+
+
 // Register a user => auth/register
 exports.registerUser = catchAsyncError(async function (req,res,next) {
+
+    const file = req.file;
+    if (!file) {
+        return res.status(400).send({
+            success : false,
+            message : 'No Image in the Request '
+        });
+    }
+    const fileName = file.filename;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/users/`
+
     const {
         name,
         email,
@@ -18,7 +31,7 @@ exports.registerUser = catchAsyncError(async function (req,res,next) {
         password,
         avatar : {
             public_id : 'avatars/kccvibpsuiusmwfepb3m',
-            url : 'https://res.cloudinary.com/shopit/image/upload/v1606305757/avatars/kccvibpsuiusmwfepb3m.png'
+            url : `${basePath}${fileName}`
         }
     })
     sendToken(user , 200 , res)

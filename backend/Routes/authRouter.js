@@ -18,8 +18,32 @@ const {
     authorizeRoles
 } = require('../middlewares/auth')
 
+const multer = require('multer')
 
-router.post('/register', registerUser);
+const FILE_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+const storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        const isValid = FILE_TYPE_MAP[file.mimetype];
+        let uploadError = new ErrorHandler('Invalid Image Type',500);
+        if (isValid) {
+            uploadError = null;
+        }
+        cb(uploadError,'public/uploads/users');
+    },
+    filename : (req,file,cb)=>{
+        const filename = file.originalname.split(' ').join('-');
+        const extension = FILE_TYPE_MAP[file.mimetype];
+        cb(null , `${filename}-${Date.now()}.${extension}`)
+    }
+})
+const uploadOptions = multer({ storage : storage})
+
+
+router.post('/register',uploadOptions.single('avatar') , registerUser);
 router.post('/login', loginUser)
 router.get('/logout', logout)
 router.route('/password/forgot').post(forgotPassword)// Problem of sendMail function
